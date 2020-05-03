@@ -1,0 +1,8 @@
+#!/bin/bash -e
+# стоп мы делаем особо, потому-что он вызывается chroot-tool-ом при операции off
+
+if test -d /chroot.d/_state; then
+  /zapusk-tool/zapusk stop --zdb /chroot.d --state_dir /chroot.d/_state
+else
+  echo "Chroota have no /chroot.d/_state - nothing to stop."
+fi

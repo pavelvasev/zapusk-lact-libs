@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+# анализирует входные строки на формат вида PATCH_HOSTS_*=значение 
+# и добавляет эти значения в файл /etc/hosts,
+# отмечая меткой #added_by_patch_hosts
+# при этом старое содержимое с этой меткой удаляется
+
+
+orig = File.readlines("/etc/hosts")
+content = orig.reject{ |line| line =~ /#added_by_patch_hosts/ }
+
+res = []
+ours = STDIN.readlines.each { |k| 
+  if k =~ /^PATCH_HOSTS.+=(.+)$/ 
+    res.push "#{$1} #added_by_patch_hosts"
+  end
+}
+puts "patch_hosts detected items for hosts: #{res.length}"
+res.each { |r| puts " * #{r}" }
+
+if res.length > 0 || content.length != orig.length
+  puts "patching /etc/hosts with these items"
+  File.open("/etc/hosts","w") do |f|
+    f.puts res.join("\n")
+    f.puts content.join()
+  end
+  puts "patched"
+end

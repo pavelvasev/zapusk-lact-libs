@@ -1,0 +1,22 @@
+#!/bin/bash -e
+# анализирует входные данные на записи вида PATCH_HOSTS_*=добавка и добавляет их значения в файл /etc/hosts, 
+# отмечая меткой #added_by_patch_hosts
+# при этом старое содержимое с этой меткой удаляется
+
+set -e
+
+original=$(cat /etc/hosts)
+current=$(grep -v "#added_by_patch_hosts" /etc/hosts)
+
+for h in $(cat | awk -F "=" '{print $1}' | grep "PATCH_HOSTS.*"); do
+  echo "see record: ${h}=${!h}"
+current="${!h} #added_by_patch_hosts
+$current"
+done
+
+if [ "$current" != "$original" ]
+then
+  echo patching /etc/hosts with new content
+  echo "$current" > /etc/hosts
+  echo patched
+fi
