@@ -1,0 +1,9 @@
+_state
+~state
+_zapusk.removed
+result*.txt
+/ruby.local/
+zapusk
+.gitignore-
+/lib/*
+zapusk.global.conf
