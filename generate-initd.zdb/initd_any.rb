@@ -30,7 +30,7 @@ PIDFILE=/var/run/<NAME>.pid
 #LOGFILE=/var/log/<NAME>.log
 #LOGFILE=/chroot.d/log/<NAME>.log
 LOGFILE=<LOGFILE>
-mkdir -p /chroot.d/log
+# mkdir -p /chroot.d/log
 
 start() {
   if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE) 2>/dev/null; then
