@@ -3,6 +3,9 @@
 # https://stackoverflow.com/questions/4060212/how-to-run-a-shell-script-when-a-file-or-directory-changes
 # https://linux.die.net/man/1/inotifywait
 
+echo "==================== inotify-dir-zdb-script started ========================"
+date
+
 source params.sh
 
 if test -z "$dir"; then
