@@ -3,7 +3,11 @@
 script_dir=$(dirname "$(readlink -f "$0")")
 
 source params.sh
-copath=$1
+
+copathes=($1)
+
+for copath in "${copathes[@]}"
+do
 
 component_guid=$(sed -n 's/global_name=//p' $copath)
 local_file=$(find "$chroot_dir/chroot.d/" -type f -name "??-$component_guid.ini")
@@ -33,3 +37,5 @@ $script_dir/default.sh destroy --only $component_guid
 # Затем убрать упоминания о компоненте из запуск-базы развернутой чруты
 rm -f "$local_file"
 rm -f "$chroot_dir/chroot.d/bindings.params/$component_guid.sh"
+
+done

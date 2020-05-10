@@ -2,6 +2,6 @@
 
 source params.sh
 
-copath=$1
+copath="$1"
 
-zapusk unemploy --zdb box $ZAPUSK_DEBUG --a "*/copath=$(readlink -f $copath)" --a "*/*/copath=$(readlink -f $copath)"
+zapusk unemploy --zdb box $ZAPUSK_DEBUG --a "*/copath=$copath" --a "*/*/copath=$copath"

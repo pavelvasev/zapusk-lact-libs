@@ -3,7 +3,7 @@
 script_dir=$(dirname "$(readlink -f "$0")")
 
 source params.sh
-copath="$1"
+copathes=($1)
 colevel="$2"
 if test -z "$colevel"; then
   echo "choota/employ-component.sh: colevel not specified!"
@@ -14,6 +14,9 @@ fi
 # мы прибавим к нему 10 и получим результат.
 
 ((p=colevel+10))
+
+for copath in "${copathes[@]}"
+do
 
   component_type=$(sed -n 's/type=//p' $copath)
   component_type_dir=$(sed -n 's/type_dir=//p' $copath)
@@ -38,4 +41,7 @@ fi
   
   echo "prehost_state_dir=/chroot.d/_state.prehost/$component_guid/" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
   echo "machine_root_dir=$chroot_dir" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
+  echo "chroot_dir=$chroot_dir" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
+  echo "employ_name=$global_name" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
 
+done

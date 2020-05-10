@@ -12,7 +12,7 @@ fi
 
 ((colevel=colevel+1))
 
-zapusk employ --zdb box $ZAPUSK_DEBUG --a "*/copath=$(readlink -f $copath)" --a "*/*/copath=$(readlink -f $copath)" --a "*/colevel=$colevel" --a "*/*/colevel=$colevel"
+zapusk employ --zdb box $ZAPUSK_DEBUG --a "*/copath=$copath" --a "*/*/copath=$copath" --a "*/colevel=$colevel" --a "*/*/colevel=$colevel"
 # первая */copath - чтобы передавалось в компоненты..
 # вторая */*/copath - чтобы передавалось в компоненты компонент.. типа когда
 # вызываем host-ftp, то он имеет vstptd-server, а тот имеет employ внутри,

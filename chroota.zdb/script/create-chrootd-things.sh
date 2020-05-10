@@ -18,11 +18,3 @@ install "$script_dir/chroot.d.template/stop" "$chroot_dir/chroot.d/stop"
 echo "BINDINGS_ZAPUSK='src:$zapusk_tool_dir tgt:/zapusk-tool'" >>"$chroot_dir/chroot.d/conf.sh"
 
 # echo "Finished. All ok"
-
-echo "
-############################ chroota-common #######################
-chroot_dir=$chroot_dir
-global_name=$global_name
-chroot_name=$chroot_name
-
-" >"$chroot_dir/chroot.d/00-common.ini"
