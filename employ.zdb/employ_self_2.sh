@@ -39,7 +39,7 @@ sum="$sum$content"
 
 echo "$sum" >to-employ
 
-if test -z "ZAPUSK_FORCE"; then
+if test -z "$ZAPUSK_FORCE"; then
 if cmp -s "to-employ" "already-employed"; then
   exit 0
 fi
