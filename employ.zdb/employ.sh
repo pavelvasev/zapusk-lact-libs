@@ -10,7 +10,7 @@ if test -z "$colevel"; then
   exit 1
 fi
 
-((colevel=colevel+1))
+((colevel=colevel+10))
 
 zapusk employ --zdb box.zdb $ZAPUSK_DEBUG --a "*/copath=$copath" --a "*/*/copath=$copath" --a "*/colevel=$colevel" --a "*/*/colevel=$colevel"
 # первая */copath - чтобы передавалось в компоненты..

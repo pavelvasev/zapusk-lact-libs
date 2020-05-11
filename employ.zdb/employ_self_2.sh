@@ -13,6 +13,7 @@ boxlink=$(readlink -f box.zdb)
 sum=""
 to_employ=""
 content=""
+level=0
 for i in "${copathes[@]:1}"
 do
 #  echo "i=$i"
@@ -28,17 +29,20 @@ $content
 type=employ-item
 file=$ffi
 target=$boxlink
-level=1
+level=$level
 "
   sum="$sum$item_content"
+  ((level=level+1))
 done
 
 sum="$sum$content"
 
 echo "$sum" >to-employ
 
+if test -z "ZAPUSK_FORCE"; then
 if cmp -s "to-employ" "already-employed"; then
   exit 0
+fi
 fi
 
 echo "Employ self: differs, re-employing."
