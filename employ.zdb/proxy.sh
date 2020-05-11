@@ -3,4 +3,4 @@
 source params.sh
 cmd=$*
 
-zapusk $cmd --zdb box $ZAPUSK_DEBUG
+zapusk $cmd --zdb box.zdb $ZAPUSK_DEBUG

@@ -3,10 +3,10 @@
 source params.sh
 
 mkdir -p box
-echo "############## horse" > box/09-horse.ini
-install arg_0.ini box/10-horse.ini
+echo "############## horse" > box.zdb/10-horse.ini
+cat arg_0.ini >> box.zdb/10-horse.ini
+# install arg_0.ini box.zdb/10-horse.ini
 
-install "$zdb_dir/box-zapusk.conf_" box/zapusk.conf
-install "$zdb_dir/box-main.ini_" box/main.ini
+echo "state_dir=../_box.state" > box.zdb/zapusk.conf
 
-zapusk create --zdb box $ZAPUSK_DEBUG
+zapusk create --zdb box.zdb $ZAPUSK_DEBUG

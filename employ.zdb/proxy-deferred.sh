@@ -10,7 +10,7 @@ if test -z "$ZAPUSK_DEFERRED_PATH"; then
   exit 1
 fi
 
-echo "$arg0_component_guid-$cmd=zapusk $cmd --zdb $state_dir/box $ZAPUSK_DEBUG" >>$ZAPUSK_DEFERRED_PATH
+echo "$arg0_component_guid-$cmd=zapusk $cmd --zdb $state_dir/box.zdb $ZAPUSK_DEBUG" >>$ZAPUSK_DEFERRED_PATH
 # echo "REG_DEF: $arg0_component_guid-$cmd=zapusk $cmd --zdb $state_dir/box $ZAPUSK_DEBUG"
 
 # zapusk $cmd --zdb box $ZAPUSK_DEBUG

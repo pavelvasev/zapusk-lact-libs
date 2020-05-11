@@ -17,6 +17,7 @@ local_file=$(find "$chroot_dir/chroot.d/" -type f -name "??-$component_guid.ini"
 # echo CCCCC
 if test ! -f "$local_file"; then
   echo "unemploy_component: local_file not found!!! path=$local_file"
+  echo "lookup was: ??-$component_guid.ini"
   rm -f "$chroot_dir/chroot.d/bindings.params/$component_guid.sh"
   exit
 fi
