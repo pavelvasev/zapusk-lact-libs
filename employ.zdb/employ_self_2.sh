@@ -9,7 +9,7 @@ copathes=($1) # make arr
 
 #echo "EMPLOY-SELF-2: copathes=$copathes"
 
-boxlink=(readlink -f box.zdb)
+boxlink=$(readlink -f box.zdb)
 sum=""
 to_employ=""
 content=""
