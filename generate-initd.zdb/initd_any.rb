@@ -39,8 +39,23 @@ start() {
   fi
   echo 'Starting service…' >&2
 #  su -c "$SCRIPT >> $LOGFILE 2>&1" $RUNAS & echo $! > $PIDFILE
-  sh -c "$SCRIPT >> $LOGFILE 2>&1 & echo \\$! > $PIDFILE"
-  echo 'Service started' >&2
+  setsid sh -c "$SCRIPT >> $LOGFILE 2>&1 & echo \\$! > $PIDFILE"
+  # about setsid: 
+  # * https://www.webhostinghero.com/how-to-create-a-process-group-in-linux/
+  # * https://stackoverflow.com/questions/30758424/starting-a-new-process-group-from-bash-script
+  
+# new logic:  
+  sleep 0.01
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
+    echo 'Service started' >&2
+    return 0
+  else
+    echo 'Service start failure - pid is not visible!' >&2
+    return 2
+  fi
+  
+# old logic:
+#  echo 'Service started' >&2
 }
 
 stop() {
