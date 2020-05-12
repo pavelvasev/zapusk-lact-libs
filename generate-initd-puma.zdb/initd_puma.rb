@@ -43,7 +43,15 @@ start() {
   echo 'Starting service…' >&2
 #  su -c "$SCRIPT >> $LOGFILE 2>&1" $RUNAS & echo $! > $PIDFILE
   sh -c "$SCRIPT >> $LOGFILE 2>&1 & echo \\$! > $PIDFILE"
-  echo 'Service started' >&2
+  # todo более что-то умное
+  sleep 0.01
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
+    echo 'Service started' >&2
+    return 0
+  else
+    echo 'Service start failure - pid is not visible!' >&2
+    return 2
+  fi
 }
 
 stop() {

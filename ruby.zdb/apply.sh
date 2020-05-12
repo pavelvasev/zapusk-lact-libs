@@ -3,6 +3,15 @@
 source params.sh
 
 echo gem: --no-document > ~/.gemrc
-/usr/bin/gem install bundler
+
+gem install bundler
+
+#--verbose
+#gem env
+#set
 
 # todo: install autocomplete
+
+#which gem
+#which bundler
+#exit 202
