@@ -1,0 +1,7 @@
+# todo
+# см https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1699176.html
+
+##################### chroota-user
+user=haproxy
+prehost_state_dir={{prehost_state_dir}}/chroota-user
+
