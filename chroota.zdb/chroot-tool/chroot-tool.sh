@@ -1330,7 +1330,7 @@ absolute_path () {
 #  if test ${1:0:1} = '/'; then 
 #    echo "test passed"
 #  fi
-  test ${1:0:1} = '/'
+  test ${1:0:1} = '/' # || test ${1:0:1} = '('
 }
 
 run () {

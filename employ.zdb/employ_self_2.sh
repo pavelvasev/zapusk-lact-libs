@@ -41,6 +41,7 @@ echo "$sum" >to-employ
 
 if test -z "$ZAPUSK_FORCE"; then
 if cmp -s "to-employ" "already-employed"; then
+  echo "Employ self: no difference, already employed same thing."
   exit 0
 fi
 fi

@@ -17,4 +17,4 @@ source params.sh
 # chroot_tool=chroot-tool.sh
 # echo "chroot_dir=$chroot_dir"
 
-$chroot_tool run "/zapusk-tool/zapusk $cmd --zdb /chroot.d --state_dir /chroot.d/_state $ZAPUSK_DEBUG" -d "$chroot_dir"
+$chroot_tool run "/zapusk-tool/zapusk $cmd --zdb /chroot.d --state_dir /chroot.d/_state --deferred-master $ZAPUSK_DEBUG" -d "$chroot_dir"
