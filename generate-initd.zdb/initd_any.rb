@@ -38,7 +38,11 @@ start() {
     return 0
   fi
   echo 'Starting service…' >&2
-#  su -c "$SCRIPT >> $LOGFILE 2>&1" $RUNAS & echo $! > $PIDFILE
+#вариант 1 чето старое  
+# su -c "$SCRIPT >> $LOGFILE 2>&1" $RUNAS & echo $! > $PIDFILE
+#вариант 2 ниработает (группа одна и та же получается у разных!) 
+# sh -c "$SCRIPT >> $LOGFILE 2>&1 & echo \\$! > $PIDFILE"
+
   setsid sh -c "$SCRIPT >> $LOGFILE 2>&1 & echo \\$! > $PIDFILE"
   # about setsid: 
   # * https://www.webhostinghero.com/how-to-create-a-process-group-in-linux/
