@@ -1,0 +1,27 @@
+#!/bin/bash -e
+
+test -d /chroot.d || { echo "must be runned inside chroot" && false; }
+
+source params.sh
+
+if test -z "$archive_dir"; then
+  echo "archive_dir var is blank"
+  exit 5
+fi
+
+if test -z "$datadir"; then
+  echo "datadir var is blank"
+  exit 5
+fi
+
+mkdir -p $archive_dir
+arcdir=$archive_dir/mongodb.$(date +"%Y-%m-%d-%s")
+
+$zapusk_tool stop --zdb /chroot.d
+
+echo "moving data to $arcdir"
+mv "$datadir" "$arcdir"
+echo done
+
+$zapusk_tool prepare-datadir --zdb /chroot.d
+$zapusk_tool start --zdb /chroot.d
