@@ -149,6 +149,8 @@ start_server() {
                         --make-pidfile --chuid $DAEMONUSER:$DAEMONGROUP \
                         --exec $NUMACTL $DAEMON $DAEMON_OPTS
             errcode=$?
+            echo " * * * Lact extra: sleep 5 second after mongo start. Mongo drops incoming connections on first seconds"
+            sleep 5
         return $errcode
 }
 
