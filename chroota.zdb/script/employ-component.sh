@@ -39,7 +39,8 @@ do
   # добавим наш любимый отныне заголовок ####
   sed -i "1s;^;##################### $component_guid\n;" "$chroot_dir/chroot.d/$p-$component_guid.ini"
   
-  echo "prehost_state_dir=/chroot.d/_state.prehost/$component_guid/" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
+#  echo "prehost_state_dir=/chroot.d/_state.prehost/$component_guid/" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
+  # добавим значения, итак упомянутые в params.ini - но сами собой они в глубину не передаются (а может стоит?)
   echo "machine_root_dir=$chroot_dir" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
   echo "chroot_dir=$chroot_dir" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
   echo "employ_name=$global_name" >>"$chroot_dir/chroot.d/$p-$component_guid.ini"
