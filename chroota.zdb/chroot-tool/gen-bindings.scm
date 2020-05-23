@@ -259,7 +259,7 @@
   ; преобразуем в список записей о точках монтирования. Выделяем из этого списка
   ; списков потенциальные сообщения об ошибках (списки строк).
   (let* ((strings (append system-points
-                          ; ПВ - больше конф не загружаем (strings-from-conf conf-path)
+                          (strings-from-conf conf-path)
                           (strings-from-vars params-path)))
          (records (map string->mount-record-list strings))
          (errors (filter (compose string? first) records)))
