@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 # https://stackoverflow.com/questions/4060212/how-to-run-a-shell-script-when-a-file-or-directory-changes
 # https://linux.die.net/man/1/inotifywait
@@ -19,9 +19,9 @@ if test -z "$runcmd"; then
 fi
 
 echo "starting inotify loop on dir=$dir"
-echo "then gonna run cmd=$runcmd with dir as 1st arg"
+echo "then gonna run cmd=$runcmd"
 
 while inotifywait --recursive --event create,move,delete $dir; do
   sleep 1
-  $runcmd "$dir"
+  INOTIFY_DETECTED_DIR="$dir" $runcmd || echo "Script exec failed. However, we continue (else inotify will stop)"
 done
