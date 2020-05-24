@@ -8,7 +8,7 @@
 Этот каталог автоматически загружается и выполняется как zdb-программа изнутри чруты host-certbot.
 
 ## Пример
-Пусть есть набор файлов `*.ini` в каталоге **/data/https-proxy/auto-cert-requests.zdb**
+Пусть есть набор файлов `*.ini` в каталоге **/data/https-proxy/auto-cert-requests.zdb** с содержимым вида
 ```
 ############### get-https-for-my-domain
 [https-cert-item]
@@ -17,12 +17,12 @@ email=some@email
 ```
 Тогда запуск команды **/etc/init.d/host-certbot update** повлечет запрос всех размещенных в каталоге сертификатов.
 * Также можно вызывать тип host-certbot с командой update
-* Также можно вызвать не update а request-certs - это более принудительный запрос.
+* Также можно вызвать **/etc/init.d/host-certbot request-certs** - это влечет запрос к certbot без кеширования.
 
 Примечание. Рассматриваетя вариант поставить inotify на указанную папку.
 
 ## См также
 Все программы семейства:
-* (host-certbot)[../host-certbot.zdb]
-* (https-proxy)[../https-proxy.zdb]
-* (https-cert-request)[../https-cert-request.zdb]
+* [host-certbot](../host-certbot.zdb)
+* [https-proxy](../https-proxy.zdb)
+* [https-cert-request](../https-cert-request.zdb)
