@@ -35,7 +35,6 @@ domains={{domains}}
 3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests.zdb** и при изменении вызывает deploy-certs
 
 Реагирует на команды:
-* update - развернуться, запросить, обновить
 * request-certs - запросить сертификаты
 * renew-certs - обновить запрошенные ранее сертификаты
 * deploy-certs - скопировать все запрошенные сертификаты в каталог  **/data/https-proxy/auto-certs** на хосте.

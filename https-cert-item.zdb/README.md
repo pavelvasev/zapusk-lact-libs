@@ -15,7 +15,7 @@
 domains=some.ru www.some.ru m.some.ru special.some.ru
 email=some@email
 ```
-Тогда запуск команды **/etc/init.d/host-certbot request-certs** повлечет запрос для всех размещенных в каталоге сертификатов.
+Тогда запуск команды **/etc/init.d/host-certbot request-certs** повлечет запрос для всех размещенных в указанном каталоге сертификатов.
 
 Примечание. Рассматривается вариант поставить inotify на указанную папку.
 
