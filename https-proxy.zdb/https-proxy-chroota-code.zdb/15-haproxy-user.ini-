@@ -1,5 +1,6 @@
 # todo
 # см https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1699176.html
+# Haproxy fails to install if there is 'haproxy' user already in system
 
 ##################### chroota-user
 user=haproxy
