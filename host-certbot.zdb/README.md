@@ -10,7 +10,7 @@ include /etc/nginx/snippets/location-https-cert-*;
 
 ## Запросы на сертификаты
 
-Чтобы host-certbot выполнял запросы на сертификаты, в каталоге **/data/https-proxy/auto-certs-requests**
+Чтобы host-certbot выполнял запросы на сертификаты, в каталоге **/data/https-proxy/auto-certs-requests.zdb**
 следует формировать zdb-программу из записей вида:
 ```
 ###################### cert-request-for-some-domain
@@ -32,7 +32,7 @@ domains={{domains}}
 
 1. Разворачивается certbot
 2. Регистрируется в cron с командой renew-certs
-3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests** и при изменении вызывает deploy-certs
+3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests.zdb** и при изменении вызывает deploy-certs
 
 Реагирует на команды:
 * update - развернуться, запросить, обновить
