@@ -26,13 +26,13 @@ domains={{domains}}
 
 ## Запросы из zdb-программ
 
-Дополнительно, на машине можно пользоваться типом [https-cert-request](../https-cert-request.zdb)
+Дополнительно, на машине можно пользоваться [https-cert-request](../https-cert-request.zdb)
 
 ## Реализация
 
 1. Разворачивается certbot
 2. Регистрируется в cron с командой renew-certs
-3. Выставляет inotify на папку /data/https-proxy/auto-certs-requests и при изменении вызывает deploy-certs
+3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests** и при изменении вызывает deploy-certs
 
 Реагирует на команды:
 * update - развернуться, запросить, обновить
