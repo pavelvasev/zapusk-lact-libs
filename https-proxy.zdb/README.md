@@ -8,7 +8,7 @@
 ####### https-proxy
 # параметры не требуются
 ```
-Результат: развернется chroot-а и в ней haproxy, а также на хосте появится скрипт /etc/init.d/https-proxy с командами start,stop,restart,reload.
+Результат: развернется chroot-а и в ней haproxy, а также на хосте появится скрипт /etc/init.d/https-proxy с командами start, stop, restart, reload.
 
 ## Связи
 * **/data/https-proxy/auto-certs** - каталог на хост-машине с сертификатами
