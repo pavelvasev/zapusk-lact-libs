@@ -34,6 +34,14 @@ do
   # вытаскиваем BINDINGS_ штучки из компонента, приписываем к ним идентификатор уникальный для copath, и тыркаем это в правильное место
   # || true
   
+  # если там уже есть с другим приоритетом такой же - убрать файл такого-же..
+  find "$chroot_dir/chroot.d/" -type f -name "??-$component_guid.ini" \! -name $p-$component_guid.ini -delete
+#  local_file=$(find "$chroot_dir/chroot.d/" -type f -name "??-$component_guid.ini")  
+#  if test ! -z "$local_file" && test $(basename "$local_file") != $p-$component_guid.ini; then
+#    echo "Found same component with another priority [$local_file]. Removing this file"
+#    rm "$local_file"
+#  fi
+  
   install "$copath" "$chroot_dir/chroot.d/$p-$component_guid.ini"
   
   # добавим наш любимый отныне заголовок ####
