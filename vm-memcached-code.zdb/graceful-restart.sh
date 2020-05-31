@@ -5,6 +5,7 @@
 
 if ! /etc/init.d/memcached status; then
   echo "memcached status returned non-zero, staring it"
+  cp -f /etc/memcached.conf memcached.started.conf
   /etc/init.d/memcached start
   exit $?
 fi
