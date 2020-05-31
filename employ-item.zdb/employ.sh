@@ -18,7 +18,9 @@ fi
 #  exit 0
 #fi
 #fi
-
+echo "-------------------- employ-item colevel=$colevel copath=$copath"
+cat $copath
+echo "--------------------"
 
 zapusk employ --zdb $target $ZAPUSK_DEBUG --a "*/copath=$copath" --a "*/*/copath=$copath" --a "*/colevel=$colevel" --a "*/*/colevel=$colevel"
 
