@@ -5,11 +5,17 @@ if test ! -f deployed-key; then
   exit 0
 fi
 
+if test ! -f deployed-to-user; then
+  echo "WARNING: deployed-to-user file blank... seems deploy broken - exiting."
+  exit 0
+fi
+
 source params.sh
 
 k=$(cat deployed-key)
-test ! -z "$user"
-tgt=$(eval echo "~$user/.ssh/authorized_keys")
+kuser=$(cat deployed-to-user)
+test ! -z "$kuser"
+tgt=$(eval echo "~$kuser/.ssh/authorized_keys")
 
 # ладно уж..
 #deployed_content=$(cat deployed-key)
@@ -18,14 +24,20 @@ tgt=$(eval echo "~$user/.ssh/authorized_keys")
 #  exit 0
 #fi
 
+# забекапили себе на всякий случай
+cp --backup "$tgt" "authorized-keys-backup-$kuser"
+
 # вытащили все, что не про наш ключ, во времянку
-grep -v "$k" "$tgt" >tmpkeys
+grep -v "$k" "$tgt" >tmpkeys || test "$?" == "1" 
+# код 1 это норм, значит ничего не нашли.. т.е. все что там в файле у них лежит - попадается под наш матч.. странно это конечно..
 # скопировали с сохранением прав исходного файла
 cp --preserve tmpkeys "$tgt"
 # удалили времянку
-rm tmpkeys
+# rm tmpkeys
 
 # ну и удалили память
 rm deployed-key
+rm deployed-to-user
 
-echo key removed
+echo "key removed from $tgt"
+
