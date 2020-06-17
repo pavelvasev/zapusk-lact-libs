@@ -32,7 +32,7 @@ git clone https://github.com/pavelvasev/zapusk-lact-libs.git
  * [dirs](dirs.zdb) создание каталогов
  * [chmod](chmod.zdb) настройка прав доступа
  * [chown](chown.zdb) смена владельца
- * [inotify-dir](inotify-dir] мониторинг изменения каталога
+ * [inotify-dir](inotify-dir) мониторинг изменения каталога
  
  * [create-user](create-user.zdb) создание пользователя
  * [ssh-authorize-key](ssh-authorize-key) добавление записи в .ssh/authorized_keys
