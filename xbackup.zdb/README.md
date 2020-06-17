@@ -40,5 +40,6 @@ conf=30:7
 
 # См. также:
 
-* [xif](../xif.zdb)
-* [xclean](../xclean.zdb)
+* [xif](../xif.zdb) - условие запуска
+* [xclean](../xclean.zdb) - очистка старых копий
+* [big-example](bix-example.zdb) - пример настройки нескольких направлений бэкапа
