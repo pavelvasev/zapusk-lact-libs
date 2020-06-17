@@ -49,15 +49,16 @@ dryrun = (ENV["dryrun"]=="1")
 if dryrun
   def dodelete(dir)
     raise "very short cmd -- strange!" if dir.length < 10
-    "rm -rf #{dir}"
-    puts "dryrun"
-
+    cmd = "rm -rf #{dir}"
+    puts "dryrun, cmd=#{cmd}"
+    puts
  end
 else
   def dodelete(dir)
     raise "very short cmd -- strange!" if dir.length < 10
     cmd = "rm -rf #{dir}"
     puts cmd
+    puts
     system cmd
   end
 end
@@ -124,7 +125,7 @@ Dir[ targetdir + "/*" ].sort.each do |d|
   end
   
   end  # for conf
-  puts
+  
 end # for files
 
 puts "xclean operation finished"
