@@ -33,9 +33,11 @@ fi
 (
 flock --verbose --nonblock 9 || (echo lockfile is locked; skipping backup operation; exit 0)
 
-rsync -rt --copy-links -v --delete --stats --bwlimit=1000 "$src/" "$processdir" --link-dest="$latestdir" $rsync_options
+rsync -rt --copy-links -v --delete --stats "$src/" "$processdir" --link-dest="$latestdir" $rsync_options
+#rsync -rt --copy-links -v --delete --stats --bwlimit=1000 "$src/" "$processdir" --link-dest="$latestdir" $rsync_options
  # --copy-links это про символические ссылки в исходнике
  # --link-dest это про то где искать оригиналы файлов, скачанных ранее
+ # --bwlimit 1000 это 1 мегабайт в секунду - пока убрано
 
 mv --no-target-directory "$processdir" "$datedir"
 rm -f -d "$latestdir"
