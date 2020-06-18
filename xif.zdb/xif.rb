@@ -6,8 +6,9 @@ require "date"
 s=ENV["machine"]||""
 if s.length > 0
   m=s.split(/[\s,]+/)
-  h=`hostname -s`
+  h=`hostname -s`.chomp
   if ! m.include?( h )
+    puts "hostname #{h} do not match list #{m.inspect}"
     exit 100
   end
 end
