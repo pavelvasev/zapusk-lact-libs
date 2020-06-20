@@ -1,27 +1,20 @@
 # xbackup-tool
 
-Предназначение: 
+Предназначение: вызывает [xbackup-tool](https://github.com/pavelvasev/xbackup-tool) для проверения rsync-бэкапа.
 
 # Пример
 
 ```
 ########### my-program
-
+[xbackup-tool]
+config_files={{zdb_dir}}/my-*.csv
 ```
-Результат: 
+Результат: запускается xbackup-tool my-*.csv
 
 # Команды
 
-* **apply** -
-* **destroy** -
+* **apply** - вызов программы
 
 # Параметры
 
-* **param1** -
-* **param2** -
-
-# См. также
-
-# Автор
-я
-
+* **config_files** - путь к файлам конфигурации бэкапа.

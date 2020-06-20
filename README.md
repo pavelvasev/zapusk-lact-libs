@@ -76,9 +76,8 @@ git clone https://github.com/pavelvasev/zapusk-lact-libs.git
  * [ftp-sjare](ftp-share.zdb) создание ftp-доступа к заданной директории
 
 ## xbackup
- * [xbackup](xbackup.zdb) инкрементальный rsync
- * [xclean](xclean.zdb) удаление лишних каталогов
- * [xif](xif.zdb) условное выполнение
+ * [xif](xif.zdb) условное выполнение 
+ * [xbackup-tool](xbackup-tool.zdb) инкрементальный rsync
 
 ## other
  * [ruby](ruby.zdb) установка и настройка ruby из пакетов
