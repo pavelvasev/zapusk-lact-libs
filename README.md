@@ -77,7 +77,8 @@ git clone https://github.com/pavelvasev/zapusk-lact-libs.git
 
 ## xbackup
  * [xif](xif.zdb) условное выполнение 
- * [xbackup-tool](xbackup-tool.zdb) инкрементальный rsync
+ * [xbackup](xbackup.zdb) инкрементальный rsync
+ * [xbackup-tool](xbackup-tool.zdb) установка xbackup-tool
 
 ## other
  * [ruby](ruby.zdb) установка и настройка ruby из пакетов
