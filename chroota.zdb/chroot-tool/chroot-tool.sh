@@ -1200,7 +1200,12 @@ create_execute () {
   local atd="$(mkdir -p "${target_dir}" && cd "${target_dir}" && pwd)"
   readonly target_dir atd
 
-  debootstrap --arch amd64 stretch "$atd" http://ftp.ru.debian.org/debian
+  CHROOT_TOOL_DEBIAN_VERSION="${CHROOT_TOOL_DEBIAN_VERSION:-stretch}"
+  CHROOT_TOOL_DEBIAN_ARCH="${CHROOT_TOOL_DEBIAN_ARCH:-amd64}"
+  # todo maybe just cmd line args?
+  # debootstrap --arch amd64 stretch "$atd" http://ftp.ru.debian.org/debian
+  debootstrap --arch amd64 $CHROOT_TOOL_DEBIAN_VERSION "$atd" http://ftp.ru.debian.org/debian
+  
 
   chroot "$atd" dash <<EOF
 set -e

@@ -17,12 +17,17 @@ then
   exit 0
 fi
 
+if test -z "$debian_version"; then
+  echo "debian_version var is blank!"
+  exit 1
+fi
+
 #chroot_template_dir=chroot-template
-chroot_template_dir=/tmp/chroot-template
+chroot_template_dir="/tmp/chroot-template-$debian_version"
 
 if ! test -d "$chroot_template_dir"
 then
-  $chroot_tool create -d "$chroot_template_dir"
+  CHROOT_TOOL_DEBIAN_VERSION="$debian_version" $chroot_tool create -d "$chroot_template_dir"
 fi
 echo "Copying chroota template to $chroot_dir"
 
