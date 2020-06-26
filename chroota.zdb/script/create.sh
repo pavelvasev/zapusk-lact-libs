@@ -22,8 +22,18 @@ if test -z "$debian_version"; then
   exit 1
 fi
 
+# feature: use chroota_base_dir to create templates so we will use
+# same file system for chrootas as for their templates, which is good:
+# * maybe /tmp have no space
+# * faster copy?
+# * possible hardlinks? (maybe not possible between different fs?)
+if test -z "$chroota_base_dir"; then
+  echo "chroota_base_dir var is blank!"
+  exit 1
+fi
+
 #chroot_template_dir=chroot-template
-chroot_template_dir="/tmp/chroot-template-$debian_version"
+chroot_template_dir="/$chroota_base_dir/chroot-template-$debian_version"
 
 if ! test -d "$chroot_template_dir"
 then
