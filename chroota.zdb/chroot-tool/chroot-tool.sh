@@ -1206,12 +1206,15 @@ create_execute () {
   # debootstrap --arch amd64 stretch "$atd" http://ftp.ru.debian.org/debian
   debootstrap --arch amd64 $CHROOT_TOOL_DEBIAN_VERSION "$atd" http://ftp.ru.debian.org/debian
   
-
+  # todo - move locale ru_RU.UTF-8 UTF-8 so on - to params!
+  # or just outside from here - to chroota.zdb
+  
   chroot "$atd" dash <<EOF
 set -e
 apt-get update
 apt-get -y install locales
 grep -e '^en_US.UTF-8 UTF-8$' /etc/locale.gen || echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+grep -e '^ru_RU.UTF-8 UTF-8$' /etc/locale.gen || echo 'ru_RU.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 echo 'export LANG=en_US.UTF-8' > /etc/profile.d/set-locale.sh
 ln -sf /usr/share/zoneinfo/Asia/Yekaterinburg /etc/localtime
