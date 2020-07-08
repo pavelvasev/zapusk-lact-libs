@@ -37,7 +37,7 @@ chroot_template_dir="/$chroota_base_dir/chroot-template-$debian_version"
 
 if ! test -d "$chroot_template_dir"
 then
-  CHROOT_TOOL_DEBIAN_VERSION="$debian_version" $chroot_tool create -d "$chroot_template_dir"
+  CHROOT_TOOL_DEBOOTSTRAP_OPTIONS="$debootstrap_options" CHROOT_TOOL_DEBIAN_VERSION="$debian_version" $chroot_tool create -d "$chroot_template_dir"
 fi
 
 if ! test -d "$chroot_template_dir/run"
