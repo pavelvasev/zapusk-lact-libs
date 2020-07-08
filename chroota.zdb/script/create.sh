@@ -39,6 +39,13 @@ if ! test -d "$chroot_template_dir"
 then
   CHROOT_TOOL_DEBIAN_VERSION="$debian_version" $chroot_tool create -d "$chroot_template_dir"
 fi
+
+if ! test -d "$chroot_template_dir/run"
+then
+  echo "chroot template directory seems broken! please manually check it's content! dir=$chroot_template_dir"
+  exit 1
+fi
+
 echo "Copying chroota template to $chroot_dir"
 
 #mkdir -p ./chroots

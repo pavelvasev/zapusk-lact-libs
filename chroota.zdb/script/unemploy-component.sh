@@ -33,7 +33,7 @@ echo "========================================"
 # Вызвать дестрой - убрать софт, развернутый компонентой
 # оказывается еще стоп надо. ибо коллапс не подразумевает стоп, как выяснилось.. 
 # это ж логика чруты, то есть нашего текущего скрипта
-$script_dir/default.sh stop --only $component_guid
+$script_dir/default.sh stop --only $component_guid || echo "STOP FAILED. We continue because probably this is normal"
 $script_dir/default.sh destroy --only $component_guid
 # Затем убрать упоминания о компоненте из запуск-базы развернутой чруты
 rm -f "$local_file"
