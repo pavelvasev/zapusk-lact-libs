@@ -39,7 +39,7 @@ end
 
 to_add = content.map{ |line| "#{line} # #{metka}" }
 
-File.open( hosts_file,"w") do |f|
+File.open( file,"w") do |f|
   f.puts (file_content + to_add).join("\n")
 end
 
