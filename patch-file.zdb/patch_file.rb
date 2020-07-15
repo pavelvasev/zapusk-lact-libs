@@ -28,8 +28,8 @@ if content.join == rejected.join
   exit 0
 end
 
-if content.length == 0
-  puts "content is empty"
+if content.length == 0 && rejected.length == 0
+  puts "content is empty and rejected is empty - nothing to do."
   exit 0
 end
 
