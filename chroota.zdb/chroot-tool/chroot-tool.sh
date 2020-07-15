@@ -1208,7 +1208,7 @@ create_execute () {
   # debootstrap --arch amd64 stretch "$atd" http://ftp.ru.debian.org/debian
 
   # debootstrap --extractor ar --arch amd64 $CHROOT_TOOL_DEBIAN_VERSION "$atd" http://ftp.ru.debian.org/debian
-  cmd=debootstrap --arch amd64 $CHROOT_TOOL_DEBOOTSTRAP_OPTIONS $CHROOT_TOOL_DEBIAN_VERSION "$atd" http://ftp.ru.debian.org/debian
+  cmd="debootstrap --arch amd64 $CHROOT_TOOL_DEBOOTSTRAP_OPTIONS $CHROOT_TOOL_DEBIAN_VERSION \"$atd\" http://ftp.ru.debian.org/debian"
   echo "calling cmd: $cmd"
   $cmd
   
