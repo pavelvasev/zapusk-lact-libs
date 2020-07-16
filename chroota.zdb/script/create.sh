@@ -33,7 +33,7 @@ if test -z "$chroota_base_dir"; then
 fi
 
 #chroot_template_dir=chroot-template
-chroot_template_dir="/$chroota_base_dir/chroot-template-$debian_version"
+chroot_template_dir="$chroota_base_dir/chroot-template-$debian_version"
 
 if ! test -d "$chroot_template_dir"
 then

@@ -1197,6 +1197,7 @@ create_parse () {
 create_execute () {
   local target_dir
   read target_dir <&5
+
   local atd="$(mkdir -p "${target_dir}" && cd "${target_dir}" && pwd)"
   readonly target_dir atd
 
@@ -1208,7 +1209,8 @@ create_execute () {
   # debootstrap --arch amd64 stretch "$atd" http://ftp.ru.debian.org/debian
 
   # debootstrap --extractor ar --arch amd64 $CHROOT_TOOL_DEBIAN_VERSION "$atd" http://ftp.ru.debian.org/debian
-  cmd="debootstrap --arch amd64 $CHROOT_TOOL_DEBOOTSTRAP_OPTIONS $CHROOT_TOOL_DEBIAN_VERSION \"$atd\" http://ftp.ru.debian.org/debian"
+  cmd="debootstrap --arch amd64 $CHROOT_TOOL_DEBOOTSTRAP_OPTIONS $CHROOT_TOOL_DEBIAN_VERSION $atd http://ftp.ru.debian.org/debian"
+  # почему-то не удалось добавить "" вокруг $atd в этой версии. ну ладно, не гоже иметь чрут-каталогу пробелы.
   echo "calling cmd: $cmd"
   $cmd
   
