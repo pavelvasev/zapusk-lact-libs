@@ -2,18 +2,21 @@
 
 # Назначение: провести testing-вызов для компонент, не разворачивая их.
 
-# Основная идея - скопируем все аргументы в папку testing.zdb
-# и вызовем на ней команду testing
+# Основная идея - скопируем первый аргумент в папку папку testing.zdb,
+# а последующие в подпапку components
+# и вызовем на testing.zdb команду testing
 
-# На самом деле это хак и реализация логики для чрут. Ибо для других
-# типов может быть другое поведение. Но пока проще сделать так.
+# А дальше пусть оно там разбирается
 
 source params.sh
 
 T=testing.zdb
 
-mkdir -p $T
 rm -rf $T/*
+#mkdir -p $T
+mkdir -p $T/args
+
+echo "employ interna, $state_dir"
 
 copathes=($1) # make arr
 for i in "${copathes[@]:0}"
@@ -21,48 +24,45 @@ do
 #  echo "i=$i"
   item_content=$(cat "$i")
   component_guid=$(sed -n 's/global_name=//p' $i)
-  
-  Q=$T/$(basename "$i" .ini).ini
-#  cp $i $T/$(basename "$i")
+
+  if test -z "$C_CREATED"; then
+    Q=$T/$(basename "$i" .ini).ini
+    C_CREATED=$Q
+  else
+    Q=$T/args/$(basename "$i" .ini).ini
+  fi
+
   echo "######## $component_guid" >$Q
   echo "$item_content" >>$Q
-
-  #################### вычисление необходимых переменных
-  # которые мы дозапишем в информацию к компонентам
-  # и еще используем далее
-  # 1) назначим первый попавшийся component_guid в employ_name (и это правильно)
-  if test -z "$employ_name"; then 
-    employ_name=$component_guid; 
-    always_append="$always_append
-employ_name=$employ_name"
-  fi
-  # 2) вычислим chroot_dir. Вообще это хак, представитель из чрут тут
-  if test -z "$chroot_dir"; then
-    its_type=$(sed -n 's/type=//p' $i)
-#    if test "$its_type" = "chroota"; then
-      its_chroot_dir=$(sed -n 's/chroot_dir=//p' $i)
-      if test -z "$its_chroot_dir"; then
-        its_chroot_dir=$chroota_base_dir/$component_guid
-      fi
-      chroot_dir=$its_chroot_dir
-      always_append="$always_append
-machine_root_dir=$chroot_dir"
-      export ZAPUSK_TESTING_CONTEXT="[chroota:$chroot_dir]"
-#    fi
-  fi
-  ####################
-#  echo "employ_name=$employ_name" >>$Q
-#  echo "machine_root_dir=$chroot_dir" >>$Q
-  echo "$always_append" >>$Q
 done
+
+# arg_files_dir собственная для этого employ
+if test ! -z "$arg_files_dir"; then
+echo "employ externa: $arg_files_dir"
+shopt -s nullglob
+for i in $arg_files_dir/*.ini
+do
+  Q=$T/args/x_$(basename "$i" .ini).ini
+  cp "$i" "$Q"
+#  echo "i=$i"
+#  item_content=$(cat "$i")
+#  component_guid=$(sed -n 's/global_name=//p' $i)
+
+#  Q=$T/args/x_$(basename "$i" .ini).ini
+#  echo "######## $component_guid" >$Q
+#  echo "$item_content" >>$Q
+done
+fi
+
+# export arg_files="$2 $3
+
+# Мысль - может проще тупо создать из 1го аргумента zdb-программу,
+# а остальные передать не копируя? Типа пусть там копируют..
 
 echo "state_dir=_state" >$T/zapusk.conf
 
-if test -z "$ZAPUSK_TESTING_CONTEXT"; 
-then
+afd=$(readlink -f $T)/args
+echo "arg_files_dir=$afd" >>$C_CREATED
+export arg_files_dir=$afd
+
 zapusk testing --zdb $T $ZAPUSK_DEBUG
-else
-echo "$ZAPUSK_PADDING" "TESTING: context $ZAPUSK_TESTING_CONTEXT start"
-zapusk testing --zdb $T $ZAPUSK_DEBUG
-echo "$ZAPUSK_PADDING" "TESTING: context $ZAPUSK_TESTING_CONTEXT finish"
-fi
