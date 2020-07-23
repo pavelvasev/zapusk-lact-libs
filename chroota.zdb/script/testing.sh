@@ -35,10 +35,28 @@ done
 
 echo "state_dir=_state" > "$T/zapusk.conf"
 
-echo "TESTING: chroota-context [$machine_root_dir] begin"
+echo "############################ testing-start
+[commands]
+open-context=testing
+[testing]
+code=context-chroota-begin
+comment=Следующие тесты в контексте чруты 44
+arg_path=$chroot_dir
+############################ testing-finish
+[commands]
+close-context=testing
+[testing]
+code=context-chroota-finish
+comment=закончились тесты в контексте чруты
+arg_path=$chroot_dir" > "$T/testing-context.ini"
+
+#echo "TESTING: chroota-context [$machine_root_dir] begin"
+
+zapusk open-context --zdb "$T"
 zapusk testing --zdb "$T" 
 zapusk system-update-testing --zdb "$T"
-echo "TESTING: chroota-context [$machine_root_dir] finish"
+zapusk close-context --zdb "$T"
+#echo "TESTING: chroota-context [$machine_root_dir] finish"
 
 zapusk prehost-testing --zdb "$T"
 zapusk host-testing --zdb "$T"
