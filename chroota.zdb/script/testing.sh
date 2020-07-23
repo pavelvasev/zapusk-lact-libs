@@ -39,14 +39,14 @@ echo "############################ testing-start
 [commands]
 open-context=testing
 [testing]
-code=context-chroota-begin
-comment=Следующие тесты в контексте чруты 44
+code=context-begin-chroota
+comment=Следующие тесты в контексте чруты
 arg_path=$chroot_dir
 ############################ testing-finish
 [commands]
 close-context=testing
 [testing]
-code=context-chroota-finish
+code=context-finish-chroota
 comment=закончились тесты в контексте чруты
 arg_path=$chroot_dir" > "$T/testing-context.ini"
 
