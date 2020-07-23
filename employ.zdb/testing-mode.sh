@@ -3,66 +3,31 @@
 # Назначение: провести testing-вызов для компонент, не разворачивая их.
 
 # Основная идея - скопируем первый аргумент в папку папку testing.zdb,
-# а последующие в подпапку components
-# и вызовем на testing.zdb команду testing
-
-# А дальше пусть оно там разбирается
+# а последующие передадим ему как аргументы employ_files, и пусть разбирается.
+# Ну мол такой протокол.
 
 source params.sh
 
 T=testing.zdb
 
 rm -rf $T/*
-#mkdir -p $T
-mkdir -p $T/args
+mkdir -p $T
 
-echo "employ interna, $state_dir"
-
-copathes=($1) # make arr
-for i in "${copathes[@]:0}"
-do
-#  echo "i=$i"
-  item_content=$(cat "$i")
-  component_guid=$(sed -n 's/global_name=//p' $i)
-
-  if test -z "$C_CREATED"; then
-    Q=$T/$(basename "$i" .ini).ini
-    C_CREATED=$Q
-  else
-    Q=$T/args/$(basename "$i" .ini).ini
-  fi
-
-  echo "######## $component_guid" >$Q
-  echo "$item_content" >>$Q
-done
-
-# arg_files_dir собственная для этого employ
-if test ! -z "$arg_files_dir"; then
-echo "employ externa: $arg_files_dir"
-shopt -s nullglob
-for i in $arg_files_dir/*.ini
-do
-  Q=$T/args/x_$(basename "$i" .ini).ini
-  cp "$i" "$Q"
-#  echo "i=$i"
-#  item_content=$(cat "$i")
-#  component_guid=$(sed -n 's/global_name=//p' $i)
-
-#  Q=$T/args/x_$(basename "$i" .ini).ini
-#  echo "######## $component_guid" >$Q
-#  echo "$item_content" >>$Q
-done
-fi
-
-# export arg_files="$2 $3
-
-# Мысль - может проще тупо создать из 1го аргумента zdb-программу,
-# а остальные передать не копируя? Типа пусть там копируют..
-
+first=$1
+echo "##################### first" >>$T/first.ini
+cat $first >>$T/first.ini
 echo "state_dir=_state" >$T/zapusk.conf
 
-afd=$(readlink -f $T)/args
-echo "arg_files_dir=$afd" >>$C_CREATED
-export arg_files_dir=$afd
+for ee in $2 $3 $4 $5 $6 $7 $8 $9
+do
+  if test ! -z "$ee"; then
+    employ_files="$employ_files $(readlink -f $ee)"
+  fi
+done
+
+# echo "employ_files=$employ_files"
+
+# надо чтобы встроенный employ мог бы это подхватить
+export employ_files="$employ_files"
 
 zapusk testing --zdb $T $ZAPUSK_DEBUG

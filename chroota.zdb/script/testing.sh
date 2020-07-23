@@ -9,21 +9,37 @@ script_dir=$(dirname "$(readlink -f "$0")")
 source params.sh
 machine_root_dir="$chroot_dir"
 
-test ! -z "$arg_files_dir"
+T=args.zdb
 
-for f in $arg_files_dir/*.ini
+rm -rf $T/*
+mkdir -p $T
+
+# echo "employ_files=$employ_files"
+
+num=0
+for f in $employ_files
 do
-  echo "machine_root_dir=$chroot_dir" >>$f
-  echo "employ_name=$global_name" >>$f
+  component_guid="guid_$num"
+  Q=$T/$num.ini # todo если больше 9?
+  #item_content=$(cat "$f")
+  #component_guid=$(sed -n 's/global_name=//p' "$f")
+  #Q=$T/$(basename "$f" .ini).ini
+
+  echo "######## $component_guid" >$Q
+  cat "$f" >>$Q
+  #echo "$item_content" >>$Q
+  echo "machine_root_dir=$chroot_dir" >>$Q
+  echo "employ_name=$global_name" >>$Q
+  ((num=num+1))
 done
 
-echo "state_dir=_state" > "$arg_files_dir/zapusk.conf"
+echo "state_dir=_state" > "$T/zapusk.conf"
 
 echo "TESTING: chroota-context [$machine_root_dir] begin"
-zapusk testing --zdb "$arg_files_dir" 
-zapusk system-update-testing --zdb "$arg_files_dir"
+zapusk testing --zdb "$T" 
+zapusk system-update-testing --zdb "$T"
 echo "TESTING: chroota-context [$machine_root_dir] finish"
 
-zapusk prehost-testing --zdb "$arg_files_dir"
-zapusk host-testing --zdb "$arg_files_dir"
+zapusk prehost-testing --zdb "$T"
+zapusk host-testing --zdb "$T"
 
