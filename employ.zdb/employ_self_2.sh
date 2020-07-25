@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-source params.sh
+# Встраивает записи, переданные в employ в аргументах, в её первый аргумент.
 
+source params.sh
 
 # первый аргумент надо отбросить - там собственно чрута
 copathes=($1) # make arr
@@ -9,8 +10,10 @@ copathes=($1) # make arr
 
 #echo "EMPLOY-SELF-2: copathes=$copathes"
 
+# Идея - накопить тело для встраивания и заодно накопить контрольную сумму
+
 boxlink=$(readlink -f box.zdb)
-sum=""
+sum="this file is just for checksum, do not worry."
 to_employ=""
 content=""
 level=0
@@ -31,13 +34,16 @@ file=$ffi
 target=$boxlink
 level=$level
 "
-  sum="$sum$item_content"
+  sum="$sum
+$item_content"
   ((level=level+1))
 done
 
 sum="$sum$content"
 
 echo "$sum" >to-employ
+
+#echo "to-employ saved as: $sum"
 
 if test -z "$ZAPUSK_FORCE"; then
 if cmp -s "to-employ" "already-employed"; then

@@ -1,4 +1,6 @@
 #!/bin/bash -e
+# Назначение - передать поданную команду в deferred-режим.
+#echo "EMPLOY: PROXY_DEFFERRED, arg1=$1"
 
 source params.sh
 cmd=$*
