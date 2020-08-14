@@ -11,18 +11,20 @@
   (false-if-exception
     (let ((target "/etc/cron.daily/logrotate-zapusk"))
       (with-output-to-file
-	target
-	(write-script "#!/bin/sh"
-		      "set -e"
-		      "EXITVAL=$?"
-		      "/usr/sbin/logrotate /etc/logrotate.conf || /usr/bin/logger -t logrotate \"ALERT exited abnormally with [$EXITVAL]\""
-		      "exit $EXITVAL"))
+        target
+        (write-script
+          "#!/bin/sh"
+          "set -e"
+          "EXITVAL=$?"
+          "/usr/sbin/logrotate /etc/logrotate.conf \\"
+          "|| /usr/bin/logger -t logrotate \"ALERT exited abnormally with [$EXITVAL]\""
+          "exit $EXITVAL"))
       (chmod target #o755))))
 
 (or (and (systemctl "stop" "logrotate.service")
-	 (systemctl "stop" "logrotate.timer")
-	 (systemctl "disable" "logrotate.service")
-	 (systemctl "disable" "logrotate.timer")
-	 (install-daily-cron)
-	 (format #t "DONE~%"))
+         (systemctl "stop" "logrotate.timer")
+         (systemctl "disable" "logrotate.service")
+         (systemctl "disable" "logrotate.timer")
+         (install-daily-cron)
+         (format #t "DONE~%"))
     (format #t "FAILURE~%"))
