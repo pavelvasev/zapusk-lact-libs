@@ -15,4 +15,4 @@ fi
 #apply=/etc/init.d/$global_name $cmd && rm -f '$fn'"
 #" > fn
 
-echo "$global_name-$cmd=/etc/init.d/$global_name $cmd" >>$ZAPUSK_DEFERRED_PATH
+echo "$global_name-$cmd=$global_name $cmd" >>$ZAPUSK_DEFERRED_PATH
