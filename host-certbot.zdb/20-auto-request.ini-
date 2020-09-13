@@ -1,9 +1,0 @@
-# решено пока не надо - может ручками оно и лучше
-######################### request-on-change
-[commands]
-host
-
-[inotify-dir]
-dir=/data/https-proxy/auto-certs-requests
-runcmd=/etc/init.d/host-certbot request-certs
-global_name=host-certbot-auto-requester

@@ -32,7 +32,7 @@ domains={{domains}}
 
 1. Разворачивается certbot
 2. Регистрируется в cron с командой renew-certs
-3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests.zdb** и при изменении вызывает deploy-certs
+3. Выставляет inotify на папку **/data/https-proxy/auto-certs-requests.zdb** и при изменении вызывает request-certs
 
 Реагирует на команды:
 * request-certs - запросить сертификаты
@@ -42,4 +42,3 @@ domains={{domains}}
 ## https-обслуживание
 
 Host-certbot только запрашивает сертификаты. Https-сервер это кто-то другой, например [https-proxy.zdb](../https-proxy.zdb)
-

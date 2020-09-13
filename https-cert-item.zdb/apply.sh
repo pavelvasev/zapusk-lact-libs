@@ -20,6 +20,7 @@ fi
 s=""
 for d in $domains; do
  s="$s -d $d"
+ # следует ли их экранировать?
 done
 
-certbot certonly --noninteractive --agree-tos --email $email --webroot -w $webroot_dir $s
+certbot certonly --noninteractive --agree-tos --email \"$email\" --webroot -w $webroot_dir $s
