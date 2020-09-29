@@ -33,3 +33,8 @@ email=some@email
 * [host-certbot](../host-certbot.zdb)
 * [https-proxy](../https-proxy.zdb)
 * [https-cert-request](../https-cert-request.zdb)
+
+# todo
+* разобраться с ситуацией когда домен не настроен
+а) постоянно, б) сначала нет а потом ок.
+* разобраться с удалением - надо отзывать запросы из certbot
