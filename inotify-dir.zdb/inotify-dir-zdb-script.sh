@@ -21,7 +21,7 @@ fi
 echo "starting inotify loop on dir=$dir"
 echo "then gonna run cmd=$runcmd"
 
-while inotifywait --recursive --event create,move,delete $dir; do
+while inotifywait --recursive --event create,move,delete,modify $dir; do
   sleep 1
   INOTIFY_DETECTED_DIR="$dir" $runcmd || echo "Script exec failed. However, we continue (else inotify will stop)"
 done
