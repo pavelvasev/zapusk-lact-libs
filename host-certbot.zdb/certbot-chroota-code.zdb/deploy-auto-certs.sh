@@ -20,5 +20,6 @@ echo "deploying letsencrypt items into $results_dir"
 for dir in $(ls -d /etc/letsencrypt/live/*/); do
   bd=$(basename "$dir")
   echo "deploying $bd"
+  echo "${dir}privkey.pem ${dir}fullchain.pem -> $results_dir/$bd-fullkeychain.pem"
   cat "${dir}privkey.pem" "${dir}fullchain.pem" > "$results_dir/$bd-fullkeychain.pem"
 done
