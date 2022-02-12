@@ -40,6 +40,8 @@ fi
 #chroot_template_dir=chroot-template
 chroot_template_dir="$chroota_base_dir/chroot-template-$debian_version"
 
+echo "Using chroot_template_dir=$chroot_template_dir. The specified debian version is used because it is configured by you in 'debian_version' parameter".
+
 if ! test -d "$chroot_template_dir"
 then
   CHROOT_TOOL_DEBOOTSTRAP_OPTIONS="$debootstrap_options" CHROOT_TOOL_DEBIAN_VERSION="$debian_version" CHROOT_TOOL_TIME_ZONE="$time_zone" $chroot_tool create -d "$chroot_template_dir"
