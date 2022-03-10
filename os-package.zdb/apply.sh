@@ -11,8 +11,11 @@ if [ "$ID_LIKE" == "arch" ]; then
 else
 
   specific_aptlist=apt_$VERSION_CODENAME
+#echo 1 $specific_aptlist
   specific_apt_vals=${!specific_aptlist}
+#echo 2 $specific_apt_vals
   list=${specific_apt_vals:-$list}
+#echo 3 $list
   list=${list:-$apt}
   echo "zapusk os-package: installing packages $list"
 
