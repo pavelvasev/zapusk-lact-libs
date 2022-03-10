@@ -7,6 +7,9 @@ test ! -z "$content"
 
 # eval echo ~username некий способ вычислить домашний каталог пользователя
 tgt=$(eval echo "~$user/.ssh/authorized_keys")
+tgt_dir=$(eval echo "~$user/.ssh")
+
+mkdir "$tgt_dir"
 
 if test -f deployed-to-user; then
   kuser=$(cat deployed-to-user)
