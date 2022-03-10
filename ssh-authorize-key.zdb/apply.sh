@@ -9,7 +9,7 @@ test ! -z "$content"
 tgt=$(eval echo "~$user/.ssh/authorized_keys")
 tgt_dir=$(eval echo "~$user/.ssh")
 
-mkdir "$tgt_dir"
+test -d "$tgt_dir" || mkdir "$tgt_dir"
 
 if test -f deployed-to-user; then
   kuser=$(cat deployed-to-user)
