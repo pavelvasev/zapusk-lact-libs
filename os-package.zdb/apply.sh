@@ -19,5 +19,5 @@ else
   list=${list:-$apt}
   echo "zapusk os-package: installing packages $list"
 
-  DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confold" install $list || exit 1
+  DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confold" install $list || exit 1
 fi
