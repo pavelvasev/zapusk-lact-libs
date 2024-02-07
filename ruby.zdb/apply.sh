@@ -8,7 +8,10 @@ echo gem: --no-document > ~/.gemrc
 # https://github.com/ruby/irb
 echo "IRB.conf[:SAVE_HISTORY] = 1000" > ~/.irbrc
 
-gem install bundler
+#gem install bundler
+# The last version of bundler (>= 0) to support your Ruby & RubyGems was 2.3.27. Try installing it with `gem install bundler -v 2.3.27`
+
+gem install bundler -v 2.3.27
 
 #--verbose
 #gem env
